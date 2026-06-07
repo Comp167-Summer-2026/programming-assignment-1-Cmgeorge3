@@ -14,49 +14,42 @@ public class TemperatureConverter {
     public static void main(String[] args) {
         Scanner scnr = new Scanner(System.in);
 
-        String input = "";
-
-        while (!input.equalsIgnoreCase("stop")) {
+        while (true) {
 
             System.out.print("Enter a temperature or type stop to quit: ");
-            input = scnr.next();
+            String input = scnr.nextLine().trim();
 
             if (input.equalsIgnoreCase("stop")) {
                 System.out.println("Program ended.");
+                break;
             }
-            else if (!isNumeric(input)) {
+
+            if (!isNumeric(input)) {
                 System.out.println("Error: Temperature must be a number.");
+                continue; // re-prompt for temperature
             }
-            else {
-                int temperature = Integer.parseInt(input);
 
+            int temperature = Integer.parseInt(input);
+
+            // Keep asking for unit until it's valid (do NOT go back to asking for temperature)
+            String unit;
+            while (true) {
                 System.out.print("Enter unit (C or F): ");
-                String unit = scnr.next();
-
-                // Keep asking for the unit until a valid one is provided.
-                while (!unit.equalsIgnoreCase("C")
-                        && !unit.equalsIgnoreCase("F")) {
-
+                String unitInput = scnr.nextLine().trim();
+                if (unitInput.equalsIgnoreCase("C") || unitInput.equalsIgnoreCase("F")) {
+                    unit = unitInput;
+                    break;
+                } else {
                     System.out.println("Error: Unit must be C or F.");
-                    System.out.print("Enter unit (C or F): ");
-                    unit = scnr.next();
                 }
+            }
 
-                double converted =
-                        convertTemperature(temperature, unit);
+            double converted = convertTemperature(temperature, unit);
 
-                if (unit.equalsIgnoreCase("C")) {
-                    System.out.printf(
-                            "%d\u00B0C is equal to %.2f\u00B0F%n",
-                            temperature,
-                            converted);
-                }
-                else {
-                    System.out.printf(
-                            "%d\u00B0F is equal to %.2f\u00B0C%n",
-                            temperature,
-                            converted);
-                }
+            if (unit.equalsIgnoreCase("C")) {
+                System.out.printf("%d\u00B0C is equal to %.2f\u00B0F%n", temperature, converted);
+            } else {
+                System.out.printf("%d\u00B0F is equal to %.2f\u00B0C%n", temperature, converted);
             }
         }
 
