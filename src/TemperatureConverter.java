@@ -33,27 +33,29 @@ public class TemperatureConverter {
                 System.out.print("Enter unit (C or F): ");
                 String unit = scnr.next();
 
-                if (!unit.equalsIgnoreCase("C")
+                // Keep asking for the unit until a valid one is provided.
+                while (!unit.equalsIgnoreCase("C")
                         && !unit.equalsIgnoreCase("F")) {
 
                     System.out.println("Error: Unit must be C or F.");
+                    System.out.print("Enter unit (C or F): ");
+                    unit = scnr.next();
+                }
+
+                double converted =
+                        convertTemperature(temperature, unit);
+
+                if (unit.equalsIgnoreCase("C")) {
+                    System.out.printf(
+                            "%d\u00B0C is equal to %.2f\u00B0F%n",
+                            temperature,
+                            converted);
                 }
                 else {
-                    double converted =
-                            convertTemperature(temperature, unit);
-
-                    if (unit.equalsIgnoreCase("C")) {
-                        System.out.printf(
-                                "%d\u00B0C is equal to %.2f\u00B0F%n",
-                                temperature,
-                                converted);
-                    }
-                    else {
-                        System.out.printf(
-                                "%d\u00B0F is equal to %.2f\u00B0C%n",
-                                temperature,
-                                converted);
-                    }
+                    System.out.printf(
+                            "%d\u00B0F is equal to %.2f\u00B0C%n",
+                            temperature,
+                            converted);
                 }
             }
         }
