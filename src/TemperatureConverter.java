@@ -44,13 +44,13 @@ public class TemperatureConverter {
 
                     if (unit.equalsIgnoreCase("C")) {
                         System.out.printf(
-                                "%d°C is equal to %.2f°F%n",
+                                "%d\u00B0C is equal to %.2f\u00B0F%n",
                                 temperature,
                                 converted);
                     }
                     else {
                         System.out.printf(
-                                "%d°F is equal to %.2f°C%n",
+                                "%d\u00B0F is equal to %.2f\u00B0C%n",
                                 temperature,
                                 converted);
                     }
