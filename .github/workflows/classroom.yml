@@ -19,7 +19,7 @@ jobs:
         with:
           test-name: Temperature Converter Test
           setup-command: curl -O https://raw.githubusercontent.com/dinkinsimani22-cloud/autotest-test-assignment/main/test/TemperatureTest.java
-            && javac -d . src/TemperatureConverter.java TemperatureTest.java
+            && javac -encoding UTF-8 -d . src/TemperatureConverter.java TemperatureTest.java
           command: java TemperatureTest
           timeout: 10
           max-score: 100
